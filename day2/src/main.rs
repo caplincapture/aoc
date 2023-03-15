@@ -1,3 +1,4 @@
+
 pub fn main() {
     use std::time::{Duration, Instant};
     let start = Instant::now();
