@@ -36,31 +36,45 @@ impl Item {
     }
 }
 
+
 fn main() -> color_eyre::Result<()> {
-    let mut total_score = 0;
+    use itertools::Itertools;
 
     let start = Instant::now();
 
-    let sum = include_str!("input.txt")
+    let sum: usize = include_str!("input.txt")
         .lines()
-        .map(|line| -> color_eyre::Result<_> {
-            let (first, second) = line.split_at(line.len() / 2);
-            let first_items = first
-                .bytes()
-                .map(Item::try_from)
-                .collect::<Result<HashSet<_>, _>>()?;
-            itertools::process_results(second.bytes().map(Item::try_from), |mut it| {
-                it.find(|&item| first_items.contains(&item))
-                    .map(|item| dbg!(item.score()))
-                    .ok_or_else(|| color_eyre::eyre::eyre!("compartments have no items in common"))
-            })?
+        .map(|line| {
+            line.bytes()
+                .map(|b| b.try_into().unwrap())
+                .fold([0u8; 53], |mut acc, x: Item| {
+                    // this might panic!
+                    acc[x.score()] = 1;
+                    acc
+                })
         })
-        .sum::<color_eyre::Result<usize>>()?;
+        .chunks(3)
+        .into_iter()
+        .map(|chunks| {
+            chunks
+                .reduce(|mut a, b| {
+                    // another trick: we're re-using `a` as the output array
+                    for (a, b) in a.iter_mut().zip(b.iter()) {
+                        *a += *b;
+                    }
+                    a
+                })
+                .expect("we always have 3 chunks")
+                .iter()
+                .position(|&b| b == 3)
+                .expect("problem statement says there is always one item in common")
+        })
+        .sum();
     let duration = start.elapsed();
 
     println!("Time elapsed in expensive_function() is: {:?}", duration);
 
-    dbg!(total_score);
+    dbg!(sum);
     Ok(())
 }
 
