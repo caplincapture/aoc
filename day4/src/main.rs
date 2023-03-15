@@ -20,7 +20,7 @@ fn main() {
                     d.parse::<u8>().unwrap(),
                 )
             })
-            .filter(|(a, b, c, d)| (a >= c && b <= d) || (a <= c && b >= d))
+            .filter(|(a, b, c, d)| a <= d && c <= b)
             .count()
     );
 
