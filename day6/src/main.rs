@@ -1,0 +1,12 @@
+
+
+fn main() {
+    println!(
+        "{}",
+        include_bytes!("../input.txt")
+            .windows(4)
+            .position(|b| !(0..3).any(|i| (i + 1..4).any(|j| b[i] == b[j])))
+            .unwrap()
+            + 4,
+    );
+}
