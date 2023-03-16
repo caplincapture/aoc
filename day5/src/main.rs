@@ -1,12 +1,12 @@
-
 use itertools::Itertools;
 
 const STACKS: usize = 9;
+const SWP: usize = 64;
 
 pub fn main() {
     let d = include_bytes!("input.txt");
     let (b, m) = d.split_at(d.windows(2).position(|b| b == b"\n\n").unwrap() + 2);
-    let mut s: [Vec<u8>; STACKS] = Default::default();
+    let (mut s, mut swp): ([Vec<u8>; STACKS], _) = (Default::default(), [0; SWP]);
 
     b.split(|b| b == &b'\n').rev().skip(1).for_each(|l| {
         l.iter()
@@ -25,10 +25,12 @@ pub fn main() {
             .map(|n| atoi::atoi(n).unwrap())
             .collect_tuple()
             .unwrap();
-        for _ in 0..n {
-            let tmp = s[a - 1].pop().unwrap();
-            s[b - 1].push(tmp);
-        }
+        let len = s[a - 1].len();
+        let swp = &mut swp[..n];
+
+        swp.copy_from_slice(&s[a - 1][len - n..len]);
+        s[a - 1].truncate(len - n);
+        s[b - 1].extend(swp.iter());
     });
 
     s.iter()
