@@ -5,6 +5,7 @@ use std::{collections::HashMap, cell::RefCell};
 use std::rc::Rc;
 
 use camino::Utf8PathBuf;
+use id_tree::{InsertBehavior, Tree, Node};
 use indexmap::IndexMap;
 use nom::{
     branch::alt,
@@ -86,16 +87,17 @@ fn parse_line(i: &str) -> IResult<&str, Line> {
     ))(i)
 }
 
-type NodeHandle = Rc<RefCell<Node>>;
+fn total_size(tree: &Tree<FsEntry>, node: &Node<FsEntry>) -> color_eyre::Result<u64> {
+    let mut total = node.data().size;
+    for child in node.children() {
+        total += total_size(tree, tree.get(child)?)?;
+    }
+    Ok(total)
+}
+
+/* type NodeHandle = Rc<RefCell<Node>>;
 
 struct PrettyNode<'a>(&'a NodeHandle);
-
-#[derive(Default)]
-struct Node {
-    size: usize,
-    children: IndexMap<Utf8PathBuf, NodeHandle>,
-    parent: Option<NodeHandle>,
-}
 
 impl<'a> fmt::Debug for PrettyNode<'a> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -118,6 +120,13 @@ impl<'a> fmt::Debug for PrettyNode<'a> {
         }
         Ok(())
     }
+}
+
+#[derive(Default)]
+struct Node {
+    size: usize,
+    children: IndexMap<Utf8PathBuf, NodeHandle>,
+    parent: Option<NodeHandle>,
 }
 
 impl Node {
@@ -153,15 +162,30 @@ fn all_dirs(n: NodeHandle) -> Box<dyn Iterator<Item = NodeHandle>> {
                 .flatten(),
         ),
     )
+} */
+
+#[derive(Debug)]
+struct FsEntry {
+    path: Utf8PathBuf,
+    size: u64,
 }
 
-fn main() {
+fn main() -> color_eyre::Result<()> {
+    color_eyre::install().unwrap();
+
     let lines = include_str!("input.txt")
         .lines()
         .map(|l| all_consuming(parse_line)(l).finish().unwrap().1);
 
-    let root = Rc::new(RefCell::new(Node::default()));
-    let mut node = root.clone();
+    let mut tree = Tree::<FsEntry>::new();
+    let root = tree.insert(
+        Node::new(FsEntry {
+            path: "/".into(),
+            size: 0,
+        }),
+        InsertBehavior::AsRoot,
+    )?;
+    let mut curr = root;
 
     for line in lines {
         println!("{line:?}");
@@ -175,40 +199,45 @@ fn main() {
                         // ignore, we're already there
                     }
                     ".." => {
-                        let parent = node.borrow().parent.clone().unwrap();
-                        node = parent;
+                        curr = tree.get(&curr)?.parent().unwrap().clone();
                     }
                     _ => {
-                        let child = node.borrow_mut().children.entry(path).or_default().clone();
-                        node = child;
+                        let node = Node::new(FsEntry {
+                            path: path.clone(),
+                            size: 0,
+                        });
+                        curr = tree.insert(node, InsertBehavior::UnderNode(&curr))?;
                     }
                 },
             },
             Line::Entry(entry) => match entry {
-                Entry::Dir(dir) => {
-                    let entry = node.borrow_mut().children.entry(dir).or_default().clone();
-                    entry.borrow_mut().parent = Some(node.clone());
+                Entry::Dir(_) => {
+                    // ignore, we'll do that when we `cd` into them
                 }
-                Entry::File(size, file) => {
-                    let entry = node.borrow_mut().children.entry(file).or_default().clone();
-                    entry.borrow_mut().size = size as usize;
-                    entry.borrow_mut().parent = Some(node.clone());
+                Entry::File(size, path) => {
+                    let node = Node::new(FsEntry { size, path });
+                    tree.insert(node, InsertBehavior::UnderNode(&curr))?;
                 }
             },
         }
     }
+
     let total_space = 70000000_u64;
-    let used_space = root.borrow().total_size();
+    let used_space = total_size(&tree, tree.get(tree.root_node_id().unwrap())?)?;
     let free_space = total_space.checked_sub(dbg!(used_space)).unwrap();
     let needed_free_space = 30000000_u64;
     let minimum_space_to_free = needed_free_space.checked_sub(free_space).unwrap();
 
-    let removed_dir_size = all_dirs(root)
-        .map(|d| d.borrow().total_size())
+    let size_to_remove = tree
+        .traverse_pre_order(tree.root_node_id().unwrap())?
+        .filter(|n| !n.children().is_empty())
+        .map(|n| total_size(&tree, n).unwrap())
         .filter(|&s| s >= minimum_space_to_free)
         .inspect(|s| {
             dbg!(s);
         })
         .min();
-    dbg!(removed_dir_size);
+    dbg!(size_to_remove);
+
+    Ok(())
 }

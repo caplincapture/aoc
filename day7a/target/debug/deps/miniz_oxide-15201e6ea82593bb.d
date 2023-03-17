@@ -1,0 +1,12 @@
+/home/g/Desktop/aoc/day7a/target/debug/deps/miniz_oxide-15201e6ea82593bb.rmeta: /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/lib.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/mod.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/core.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/output_buffer.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/stream.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/shared.rs
+
+/home/g/Desktop/aoc/day7a/target/debug/deps/libminiz_oxide-15201e6ea82593bb.rlib: /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/lib.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/mod.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/core.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/output_buffer.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/stream.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/shared.rs
+
+/home/g/Desktop/aoc/day7a/target/debug/deps/miniz_oxide-15201e6ea82593bb.d: /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/lib.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/mod.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/core.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/output_buffer.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/stream.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/shared.rs
+
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/lib.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/mod.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/core.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/output_buffer.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/inflate/stream.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/miniz_oxide-0.6.2/src/shared.rs:
