@@ -1,0 +1,15 @@
+/home/g/Desktop/aoc/day7a/target/debug/deps/owo_colors-8713c6145249e7cb.rmeta: /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/lib.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/css.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/xterm.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/custom.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/dynamic.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/combo.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/dyn_colors.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/dyn_styles.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/styled_list.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/styles.rs
+
+/home/g/Desktop/aoc/day7a/target/debug/deps/owo_colors-8713c6145249e7cb.d: /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/lib.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/css.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/xterm.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/custom.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/dynamic.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/combo.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/dyn_colors.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/dyn_styles.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/styled_list.rs /home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/styles.rs
+
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/lib.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/css.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/xterm.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/custom.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/colors/dynamic.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/combo.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/dyn_colors.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/dyn_styles.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/styled_list.rs:
+/home/g/.cargo/registry/src/github.com-1ecc6299db9ec823/owo-colors-3.5.0/src/styles.rs:
