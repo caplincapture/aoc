@@ -187,6 +187,10 @@ fn main() -> color_eyre::Result<()> {
     )?;
     let mut curr = root;
 
+    use std::time::{Duration, Instant};
+
+    let start = Instant::now();
+
     for line in lines {
         println!("{line:?}");
         match line {
@@ -228,16 +232,20 @@ fn main() -> color_eyre::Result<()> {
     let needed_free_space = 30000000_u64;
     let minimum_space_to_free = needed_free_space.checked_sub(free_space).unwrap();
 
-    let size_to_remove = tree
+    let sum = tree
         .traverse_pre_order(tree.root_node_id().unwrap())?
+        // only consider folders:
         .filter(|n| !n.children().is_empty())
         .map(|n| total_size(&tree, n).unwrap())
-        .filter(|&s| s >= minimum_space_to_free)
+        .filter(|&s| s <= 100_000)
         .inspect(|s| {
             dbg!(s);
         })
-        .min();
-    dbg!(size_to_remove);
+        .sum::<u64>();
+    let duration = start.elapsed();
+
+    println!("Time elapsed in expensive_function() is: {:?}", duration);
+    dbg!(sum);
 
     Ok(())
 }
