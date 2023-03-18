@@ -19,8 +19,15 @@ enum Instruction {
 
 const DISPLAY_MASK: u64 = 0b1111111111111111111111111111111111111111;
 
-fn sprite_value(pos: u32) -> u64 {
-    (0b11100000000000000000000000000000000000000 >> pos) & DISPLAY_MASK
+fn sprite_value(pos: i32) -> u64 {
+    let model = 0b11100000000000000000000000000000000000000_u64;
+    let shifted;
+    if pos < 0 {
+        (shifted, _) = model.overflowing_shl((-pos).try_into().unwrap());
+    } else {
+        (shifted, _) = model.overflowing_shr(pos.try_into().unwrap());
+    }
+    shifted & DISPLAY_MASK
 }
 
 fn cycle_mask(cycle: u32) -> u64 {
@@ -31,6 +38,12 @@ fn cycle_mask(cycle: u32) -> u64 {
 fn test_sprite_value() {
 
     use pretty_assertions::assert_eq;
+
+    assert_eq!(
+        format!("{:040b}", sprite_value(-1)),
+        "1000000000000000000000000000000000000000"
+    );
+    
     assert_eq!(
         format!("{:040b}", sprite_value(0)),
         "1100000000000000000000000000000000000000"
@@ -79,14 +92,22 @@ struct MachineState {
 
 impl fmt::Debug for MachineState {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(
+        writeln!(
             f,
             "cycle={} x={} current={:?} ({} instructions left)",
             self.cycle,
             self.x,
             self.current,
             self.instructions.len()
-        )
+        )?;
+        for line in &self.display_lines {
+            for i in 0..40 {
+                let c = if line & cycle_mask(i) > 0 { '#' } else { '.' };
+                write!(f, "{c}")?;
+            }
+            writeln!(f)?;
+        }
+        Ok(())
     }
 }
 
@@ -98,8 +119,9 @@ impl MachineState {
                 .map(|l| all_consuming(Instruction::parse)(l).finish().unwrap().1)
                 .collect(),
             current: None,
-            cycle: 1,
+            cycle: 0,
             x: 1,
+            display_lines: vec![],
         };
         res.decode();
         res
@@ -107,6 +129,17 @@ impl MachineState {
 
     fn decode(&mut self) {
         self.current = self.instructions.pop_front().map(|ins| (ins, ins.cycles()));
+    }
+
+    fn draw(&mut self) {
+        let crt_line = (self.cycle / 40) as usize;
+        if crt_line + 1 > self.display_lines.len() {
+            self.display_lines.push(0);
+        }
+        let crt_line = self.display_lines.get_mut(crt_line).unwrap();
+        let cycle_mask = cycle_mask(self.cycle);
+        let sprite = sprite_value(self.x as _);
+        *crt_line |= cycle_mask & sprite;
     }
 
     fn step(&mut self) -> bool {
@@ -123,6 +156,7 @@ impl MachineState {
             }
             self.decode();
         }
+
         self.cycle += 1;
         true
     }
@@ -131,22 +165,12 @@ impl MachineState {
 
 fn main() {
     let mut ms = MachineState::new();
-    let counted = [20, 60, 100, 140, 180, 220]
-        .into_iter()
-        .collect::<HashSet<u32>>();
-
-    let mut total = 0;
     loop {
+        ms.draw();
         println!("{:?}", ms);
-        // definitely not the most efficient way to do this, but they can't
-        // all be winners
-        if counted.contains(&ms.cycle) {
-            total += ms.cycle as i32 * ms.x;
-        }
-
         if !ms.step() {
             break;
         }
     }
-    println!("total: {total}");
 }
+
