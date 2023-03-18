@@ -17,6 +17,42 @@ enum Instruction {
     Addx(i32),
 }
 
+const DISPLAY_MASK: u64 = 0b1111111111111111111111111111111111111111;
+
+fn sprite_value(pos: u32) -> u64 {
+    (0b11100000000000000000000000000000000000000 >> pos) & DISPLAY_MASK
+}
+
+fn cycle_mask(cycle: u32) -> u64 {
+    (0b1000000000000000000000000000000000000000 >> (cycle % 40)) & DISPLAY_MASK
+}
+
+#[test]
+fn test_sprite_value() {
+
+    use pretty_assertions::assert_eq;
+    assert_eq!(
+        format!("{:040b}", sprite_value(0)),
+        "1100000000000000000000000000000000000000"
+    );
+    assert_eq!(
+        format!("{:040b}", sprite_value(1)),
+        "1110000000000000000000000000000000000000"
+    );
+    assert_eq!(
+        format!("{:040b}", sprite_value(38)),
+        "0000000000000000000000000000000000000111"
+    );
+    assert_eq!(
+        format!("{:040b}", sprite_value(39)),
+        "0000000000000000000000000000000000000011"
+    );
+    assert_eq!(
+        format!("{:040b}", sprite_value(40)),
+        "0000000000000000000000000000000000000001"
+    );
+}
+
 impl Instruction {
     fn parse(i: &str) -> IResult<&str, Self> {
         let noop = tag("noop");
@@ -37,6 +73,8 @@ struct MachineState {
     current: Option<(Instruction, u32)>,
     cycle: u32,
     x: i32,
+    // 👇
+    display_lines: Vec<u64>,
 }
 
 impl fmt::Debug for MachineState {
