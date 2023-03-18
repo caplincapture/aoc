@@ -8,12 +8,14 @@ const H: usize = 165;
 pub fn main() {
     let (mut map, mut sand) = ([[false; W]; H], 0);
 
+    let mut lowest = 0;
     include_bytes!("../input.txt")
         .split(|b| b == &b'\n')
         .filter(|b| !b.is_empty())
         .map(|l| line(l).unwrap().1)
         .for_each(|coords| {
             coords.array_windows().for_each(|[a, b]| {
+                lowest = lowest.max(a.1.max(b.1));
                 if a.0 == b.0 {
                     (a.1.min(b.1)..=a.1.max(b.1)).for_each(|y| map[y][a.0] = true);
                 } else {
@@ -22,22 +24,26 @@ pub fn main() {
             });
         });
 
-    while let Some((x, y)) = trace(&map, (500, 0)) {
-        map[y][x] = true;
+    while let Some((x, y)) = trace(&map, (500, 0), lowest + 2) {
+        if y == 0 {
+            break;
+        }
         sand += 1;
+        map[y][x] = true;
     }
 
-    println!("{}", sand);
+    println!("{}", sand + 1);
 }
 
-fn trace(map: &[[bool; W]; H], (mut x, y): (usize, usize)) -> Option<(usize, usize)> {
-    (y + 1..H - 1)
+fn trace(map: &[[bool; W]; H], (mut x, y): (usize, usize), low: usize) -> Option<(usize, usize)> {
+    (y..H - 1)
         .find(|y| {
-            [x, x - 1, x + 1]
-                .into_iter()
-                .find(|x| !map[*y + 1][*x])
-                .map(|xx| x = xx)
-                .is_none()
+            *y == low - 1
+                || [x, x - 1, x + 1]
+                    .into_iter()
+                    .find(|x| !map[*y + 1][*x])
+                    .map(|xx| x = xx)
+                    .is_none()
         })
         .map(|y| (x, y))
 }
