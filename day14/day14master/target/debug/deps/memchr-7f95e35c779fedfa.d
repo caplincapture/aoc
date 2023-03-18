@@ -1,0 +1,13 @@
+/home/g/Desktop/aoc/day14/day14master/target/debug/deps/memchr-7f95e35c779fedfa.rmeta: /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/lib.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/fallback.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/iter.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/naive.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/mod.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/avx.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/sse2.rs
+
+/home/g/Desktop/aoc/day14/day14master/target/debug/deps/libmemchr-7f95e35c779fedfa.rlib: /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/lib.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/fallback.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/iter.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/naive.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/mod.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/avx.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/sse2.rs
+
+/home/g/Desktop/aoc/day14/day14master/target/debug/deps/memchr-7f95e35c779fedfa.d: /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/lib.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/fallback.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/iter.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/naive.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/mod.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/avx.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/sse2.rs
+
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/lib.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/fallback.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/iter.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/naive.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/mod.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/avx.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/memchr-2.3.4/src/x86/sse2.rs:
