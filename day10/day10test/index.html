@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			background: #333;
+			color: #D1D4D1;
+			font-family: sans-serif;
+		}
+
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 1em;
+		}
+
+		button {
+			font-size: 1.4rem;
+			padding: 0.4em 1.4em;
+			margin-bottom: 1em;
+		}
+
+		#output {
+			white-space: pre;
+		}
+
+		#output .matrix {
+			font-family: monospace;
+			letter-spacing: .4em;
+			color: #6C0;
+		}
+
+		#output i {
+			color: #aaa;
+		}
+	</style>
+</head>
+
+<body>
+	<button disabled id="play">▶ Play</button>
+	<div id="output">Click Play button to begin!</div>
+
+	<script type="module">
+		import init, { Machine } from "./pkg/day10.js";
+		async function main() {
+			// DOM is already loaded, the `<script>` tag is at the bottom of the page
+			let button = document.getElementById("play");
+
+			// wait for wasm to be actually loaded
+			await init();
+			button.disabled = false;
+
+			let play = () => {
+				button.disabled = true;
+				let m = new Machine();
+				let step = () => {
+					m.draw();
+					let s = `cycle=${m.get_cycle()}, x=${m.get_x()}\n\n<div class="matrix">`;
+					for (let y = 0; y < 6; y++) {
+						for (let x = 0; x < 40; x++) {
+							let c = m.get_pixel(x, y) ? "#" : "<i>.</i>";
+							s += c;
+						}
+						s += "\n";
+					}
+					s += "</div>";
+					document.getElementById("output").innerHTML = s;
+
+					if (m.step()) {
+						requestAnimationFrame(step);
+					} else {
+						button.disabled = false;
+					}
+				};
+				requestAnimationFrame(step);
+			};
+
+			button.onclick = () => { play(); };
+		};
+		main();
+	</script>
+</body>
+
+</html>
