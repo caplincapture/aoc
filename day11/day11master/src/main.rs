@@ -1,5 +1,6 @@
 
 
+
 use itertools::Itertools;
 
 struct Monkey {
@@ -38,11 +39,11 @@ pub fn main() {
         .collect();
     let (mo, mut bags): (usize, _) = (m.iter().map(|m| m.div).product(), vec![vec![]; m.len()]);
 
-    (0..20).for_each(|_| {
+    (0..10_000).for_each(|_| {
         m.iter_mut().enumerate().for_each(|(i, m)| {
             m.bag.append(&mut bags[i]);
             m.bag.drain(0..).for_each(|mut n| {
-                n = (m.op)(n) / 3 % mo;
+                n = (m.op)(n) % mo;
                 bags[if n % m.div == 0 { m.yay } else { m.nay }].push(n);
                 m.ins += 1;
             });
