@@ -1,20 +1,23 @@
-use nom::{*, sequence::pair};
+use nom::*;
 use std::cmp::Ordering;
 
 pub fn main() {
+    let first = Item::L(vec![Item::L(vec![Item::I(2)])]);
+    let second = Item::L(vec![Item::L(vec![Item::I(6)])]);
+    let packets: Vec<Item> = include_str!("../input.txt")
+        .lines()
+        .filter(|l| !l.is_empty())
+        .map(|l| item(l.as_bytes()).unwrap().1)
+        .filter(|i| i < &second)
+        .collect();
+
     println!(
         "{}",
-        include_str!("../input.txt")
-            .split("\n\n")
-            .map(|p| pair(p.as_bytes()).unwrap().1)
-            .enumerate()
-            .filter(|(_, (a, b))| a.cmp(b) == Ordering::Less)
-            .map(|(i, _)| i + 1)
-            .sum::<usize>(),
+        (packets.iter().filter(|i| *i < &first).count() + 1) * (packets.len() + 2)
     );
 }
 
-#[derive(PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq)]
 enum Item {
     I(u8),
     L(Vec<Item>),
@@ -42,4 +45,3 @@ impl PartialOrd for Item {
 named!(item<&[u8], Item>, alt!(map!(list, Item::L) | map!(num, Item::I)));
 named!(num<&[u8], u8>, map_opt!(nom::character::complete::digit1, atoi::atoi));
 named!(list<&[u8], Vec<Item>>, delimited!(char!('['), separated_list0!(char!(','), item), char!(']')));
-named!(pair<&[u8], (Item, Item)>, separated_pair!(item, tag!("\n"), item));
