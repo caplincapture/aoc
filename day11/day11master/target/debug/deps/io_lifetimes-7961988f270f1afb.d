@@ -1,0 +1,12 @@
+/home/g/Desktop/aoc/day11/day11master/target/debug/deps/io_lifetimes-7961988f270f1afb.rmeta: /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/lib.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/portability.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/traits.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/example_ffi.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/raw.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/views.rs
+
+/home/g/Desktop/aoc/day11/day11master/target/debug/deps/libio_lifetimes-7961988f270f1afb.rlib: /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/lib.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/portability.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/traits.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/example_ffi.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/raw.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/views.rs
+
+/home/g/Desktop/aoc/day11/day11master/target/debug/deps/io_lifetimes-7961988f270f1afb.d: /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/lib.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/portability.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/traits.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/example_ffi.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/raw.rs /home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/views.rs
+
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/lib.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/portability.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/traits.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/example_ffi.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/raw.rs:
+/home/g/.cargo/registry/src/index.crates.io-6f17d22bba15001f/io-lifetimes-1.0.7/src/views.rs:
