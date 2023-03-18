@@ -1,0 +1,21 @@
+# in `Justfile`
+
+# just manual: https://github.com/casey/just#readme
+
+_default:
+	just --list
+
+deploy name:
+	#!/bin/bash -eux
+	DEST="/home/g/Desktop/aoc/day12/{{name}}"
+	echo "Will deploy to $DEST"
+	if [ -d $DEST ]; then
+		echo "Destination already exists, removing with confirmation"
+		rm -rfI $DEST
+	fi
+
+	rm -rf pkg
+	wasm-pack build --target web
+	mkdir -p $DEST/pkg
+	cp index.html $DEST/
+	cp pkg/*.{js,wasm} $DEST/pkg

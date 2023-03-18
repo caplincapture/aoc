@@ -1,0 +1,1 @@
+/home/g/Desktop/aoc/day12/day12test/target/debug/day12test: /home/g/Desktop/aoc/day12/day12test/src/input.txt /home/g/Desktop/aoc/day12/day12test/src/lib.rs /home/g/Desktop/aoc/day12/day12test/src/main.rs
