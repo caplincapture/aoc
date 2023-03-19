@@ -1,5 +1,6 @@
 use std::collections::{hash_map::Entry, HashMap, HashSet};
 
+use itertools::Itertools;
 use nom::{combinator::all_consuming, Finish};
 use parse::{Name, Valve};
 
@@ -12,6 +13,9 @@ type Connections = NameMap<(Path, Flow)>;
 use std::sync::atomic::AtomicU64;
 
 static MOVES_CALLED: AtomicU64 = AtomicU64::new(0);
+
+// maps "valves open" to "best pressure achieved"
+type Best = HashMap<NameMap<()>, u64>;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 struct Flow(u64);
@@ -156,11 +160,19 @@ impl State<'_> {
         })
     }
 
-    fn apply_best_moves(&self) -> Self {
+    fn apply_best_moves(&self, best: &mut Best) -> Self {
         let mut best_state = self.clone();
 
+        best.entry(self.open_valves.clone())
+            .and_modify(|v| {
+                if self.pressure > *v {
+                    *v = self.pressure
+                }
+            })
+            .or_insert(self.pressure);
+
         for mv in self.moves() {
-            let next = self.apply(&mv).apply_best_moves();
+            let next = self.apply(&mv).apply_best_moves(best);
             if next.pressure > best_state.pressure {
                 best_state = next;
             }
@@ -171,7 +183,7 @@ impl State<'_> {
 
 fn main() {
     let net = Network::new();
-    let state = State {
+    let p1_state = State {
         net: &net,
         position: Name(*b"AA"),
         max_turns: 30,
@@ -180,10 +192,25 @@ fn main() {
         open_valves: Default::default(),
     };
 
-    let state = state.apply_best_moves();
-    println!("final pressure = {}", state.pressure);
-    println!(
-        "State::moves called {} times",
-        MOVES_CALLED.load(std::sync::atomic::Ordering::SeqCst)
-    );
+    {
+        let mut best = Best::default();
+        let state = p1_state.apply_best_moves(&mut best);
+        println!("part 1 pressure = {}", state.pressure);
+    }
+
+    {
+        let mut best = Best::default();
+        let mut p2_state = p1_state.clone();
+        p2_state.max_turns = 26;
+        p2_state.apply_best_moves(&mut best);
+
+        let best_pressure = best
+            .iter()
+            .tuple_combinations()
+            .filter(|(human, elephant)| human.0.is_disjoint(elephant.0))
+            .map(|(human, elephant)| human.1 + elephant.1)
+            .max()
+            .unwrap();
+        println!("part 2 pressure: {best_pressure}");
+    }
 }

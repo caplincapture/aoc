@@ -64,7 +64,7 @@ impl Name {
 
 pub const MAX_NAME: usize = 26_usize.pow(2);
 
-#[derive(Clone)]
+#[derive(Clone, Eq, Hash, PartialEq)]
 pub struct NameMap<T> {
     values: [Option<T>; MAX_NAME],
 }
@@ -108,6 +108,14 @@ impl<T> NameMap<T> {
             .iter()
             .enumerate()
             .filter_map(|(i, v)| v.as_ref().map(|_| Name::from_usize(i)))
+    }
+    
+    pub fn overlaps(&self, other: &Self) -> bool {
+        self.keys().any(|k| other.contains(k))
+    }
+
+    pub fn is_disjoint(&self, other: &Self) -> bool {
+        !self.overlaps(other) && !other.overlaps(self)
     }
 }
 
