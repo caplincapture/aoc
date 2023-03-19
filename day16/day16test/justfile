@@ -1,0 +1,6 @@
+run:
+	#!/bin/bash -eux
+	ulimit -s unlimited
+	export RUSTFLAGS="-C link-args=-Wl,-zstack-size=134217728"
+	cargo build --release
+	time ./target/release/day16test

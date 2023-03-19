@@ -1,0 +1,4 @@
+prereq: ./debuginfod-check.pl
+prog: debuginfod-check
+vgopts: -q
+env: DEBUGINFOD_URLS=localhost DEBUGINFOD_CACHE_PATH=/home/g/Desktop/aoc/day16/day16test/valgrind-3.20.0/memcheck/tests/linux/.debuginfod
