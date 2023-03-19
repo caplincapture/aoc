@@ -1,0 +1,19 @@
+[package]
+name = "day9test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+console_error_panic_hook = "0.1"
+eframe = "0.20"
+egui = "0.20"
+nom = "7"
+tracing-wasm = "0.2"
+wasm-bindgen-futures = "0.4"
+
+
+[profile.release]
+opt-level = 's'
+lto = true
